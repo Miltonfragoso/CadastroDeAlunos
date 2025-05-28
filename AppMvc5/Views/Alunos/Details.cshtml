@@ -1,58 +1,53 @@
 ﻿@model AppMvc5.Models.Aluno
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhe do Aluno";
 }
 
-<h2>Details</h2>
+<h2>Detalhes do aluno: @Model.Nome</h2>
 
-<div>
-    <h4>Aluno</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DataMatricula)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataMatricula)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
+        </th>
+        <th></th>
+    </tr>
 
-        <dd>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DataMatricula)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CPF)
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Ativo)
-        </dd>
+        </td>
+        <td>
+            <div class="form-group">
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
+                </div>
+        </td>
+    </tr>
+</table>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
