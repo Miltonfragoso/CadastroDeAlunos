@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AppMvc5.Models;
 
@@ -13,22 +7,24 @@ namespace AppMvc5.Controllers
 {
     public class AlunosController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Alunos
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+
+
+        [HttpGet]
+        [Route("listar-alunos")]
         public async Task<ActionResult> Index()
         {
             return View(await db.Alunos.ToListAsync());
         }
 
-        // GET: Alunos/Details/5
-        public async Task<ActionResult> Details(int? id)
+        [HttpGet]
+        [Route("aluno-detalhe/{id:int}")]
+        public async Task<ActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Aluno aluno = await db.Alunos.FindAsync(id);
+            var aluno = await db.Alunos.FindAsync(id);
+
             if (aluno == null)
             {
                 return HttpNotFound();
@@ -36,7 +32,8 @@ namespace AppMvc5.Controllers
             return View(aluno);
         }
 
-        // GET: Alunos/Create
+        [HttpGet]
+        [Route("novo-aluno")]
         public ActionResult Create()
         {
             return View();
@@ -45,8 +42,10 @@ namespace AppMvc5.Controllers
         // POST: Alunos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // O Bind filtra quais dados quero receber no método Create vindo da tabela aluno
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("novo-aluno")]
         public async Task<ActionResult> Create([Bind(Include = "Id,Nome,Email,CPF,DataMatricula,Ativo")] Aluno aluno)
         {
             if (ModelState.IsValid)
@@ -59,14 +58,12 @@ namespace AppMvc5.Controllers
             return View(aluno);
         }
 
-        // GET: Alunos/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        [HttpGet]
+        [Route("editar-aluno/{id:int}")]
+        public async Task<ActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Aluno aluno = await db.Alunos.FindAsync(id);
+
             if (aluno == null)
             {
                 return HttpNotFound();
@@ -79,6 +76,7 @@ namespace AppMvc5.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("editar-aluno/{id:int}")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Nome,Email,CPF,DataMatricula,Ativo")] Aluno aluno)
         {
             if (ModelState.IsValid)
@@ -90,14 +88,12 @@ namespace AppMvc5.Controllers
             return View(aluno);
         }
 
-        // GET: Alunos/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        [HttpGet]
+        [Route("excluir-aluno/{id:int}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Aluno aluno = await db.Alunos.FindAsync(id);
+
             if (aluno == null)
             {
                 return HttpNotFound();
@@ -105,8 +101,9 @@ namespace AppMvc5.Controllers
             return View(aluno);
         }
 
-        // POST: Alunos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        
+        [HttpPost]
+        [Route("excluir-aluno/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
