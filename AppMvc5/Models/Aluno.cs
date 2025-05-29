@@ -20,10 +20,12 @@ namespace AppMvc5.Models
         [EmailAddress(ErrorMessage = "E-mail em formato inválido")]
         public string Email { get; set; }
 
+        public string Descrição{ get; set; }
+
         [Required(ErrorMessage = "O campo {0} é requerido")]
         public string CPF { get; set; }
 
-        //public string Descricao { get; set; }
+        public string Descricao { get; set; }
 
         public DateTime DataMatricula { get; set; }
 

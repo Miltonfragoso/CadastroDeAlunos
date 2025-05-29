@@ -47,7 +47,7 @@ namespace AppMvc5.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-aluno")]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Nome,Email,CPF,Ativo")] Aluno aluno)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Nome,Email,CPF,Descricao,Ativo")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace AppMvc5.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("editar-aluno/{id:int}")]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Nome,Email,CPF,Ativo")] Aluno aluno)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Nome,Email,CPF,Descricao,Ativo")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {

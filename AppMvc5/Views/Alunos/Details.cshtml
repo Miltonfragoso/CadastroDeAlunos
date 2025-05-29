@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.CPF)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Ativo)
         </th>
         <th></th>
@@ -40,12 +43,15 @@
             @Html.DisplayFor(model => model.CPF)
         </td>
         <td>
+            @Html.DisplayFor(model => model.Descricao)
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Ativo)
         </td>
         <td>
             <div class="form-group">
-                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
-                </div>
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
+            </div>
         </td>
     </tr>
 </table>
