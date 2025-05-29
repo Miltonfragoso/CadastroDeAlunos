@@ -6,6 +6,7 @@ using AppMvc5.Models;
 
 namespace AppMvc5.Controllers
 {
+    [Authorize]
     public class AlunosController : Controller
     {
 
@@ -54,6 +55,9 @@ namespace AppMvc5.Controllers
                 aluno.DataMatricula = DateTime.Now;
                 db.Alunos.Add(aluno);
                 await db.SaveChangesAsync();
+
+                TempData["Mensagem"] = "Aluno cadastrado com sucesso!";
+
                 return RedirectToAction("Index");
             }
 
